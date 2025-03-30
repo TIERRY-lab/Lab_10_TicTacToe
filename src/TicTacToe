@@ -1,0 +1,80 @@
+import java.util.Scanner;
+
+public class SafeInput {
+
+/**
+*
+ * @param pipe a Scanner opened to read from System.in
+
+* @param prompt prompt for the user
+
+* @return a String response that is not zero length
+
+*/
+
+    public static String getNonZeroLenString(Scanner pipe, String prompt)
+
+    {
+
+        String retString = ""; // Set this to zero length. Loop runs until it isn't
+
+        do
+
+        {
+
+            System.out.print("\n" +prompt + ": "); // show prompt add space
+
+            retString = pipe.nextLine();
+
+        }while(retString.length() == 0);
+
+
+
+        return retString;
+
+
+
+    }
+}
+
+
+
+
+import java.util.Scanner;
+
+public class SafeInput {
+
+    /**
+     * Gets an integer input from the user within a specific range.
+     *
+     * @param console a Scanner object to read input
+     * @param prompt a message to prompt the user
+     * @param low the lower bound of the range
+     * @param high the upper bound of the range
+     * @return an integer within the specified range
+     */
+    public static int getRangedInt(Scanner console, String prompt, int low, int high) {
+        int userInput;
+
+        do {
+            System.out.print(prompt + " [" + low + " - " + high + "]: "); // Prompt with range
+
+            // Check if input is valid
+            while (!console.hasNextInt()) {
+                console.next(); // Clear invalid input
+                System.out.print("Invalid input. " + prompt + " [" + low + " - " + high + "]: ");
+            }
+
+            userInput = console.nextInt(); // Read valid input
+            console.nextLine(); // Clear the newline character
+
+            // Check if input is within range
+            if (userInput < low || userInput > high) {
+                System.out.println("Input out of range. Please try again.");
+            }
+
+        } while (userInput < low || userInput > high); // Repeat until input is valid and within range
+
+        return userInput; // Return the valid input
+    }
+}
